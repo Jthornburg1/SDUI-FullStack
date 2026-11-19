@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "id": "contact",
+  "revision": 1,
+  "title": "Contact details",
+  "description": "A simple contact form with text and choice fields.",
+  "sections": [
+    {
+      "id": "personal",
+      "title": "Your details",
+      "fields": [
+        {
+          "id": "fullName",
+          "type": "text",
+          "label": "Full name",
+          "required": true,
+          "placeholder": "Alex Morgan",
+          "validation": {
+            "minLength": 2,
+            "maxLength": 80
+          }
+        },
+        {
+          "id": "email",
+          "type": "email",
+          "label": "Email address",
+          "required": true,
+          "placeholder": "alex@example.com"
+        },
+        {
+          "id": "phone",
+          "type": "phone",
+          "label": "Phone number",
+          "required": false,
+          "placeholder": "555-0100"
+        }
+      ]
+    },
+    {
+      "id": "message",
+      "title": "Your message",
+      "fields": [
+        {
+          "id": "topic",
+          "type": "singleSelect",
+          "label": "Topic",
+          "required": false,
+          "defaultValue": "general",
+          "options": [
+            {
+              "value": "general",
+              "label": "General question"
+            },
+            {
+              "value": "support",
+              "label": "Support"
+            },
+            {
+              "value": "feedback",
+              "label": "Feedback"
+            }
+          ]
+        },
+        {
+          "id": "message",
+          "type": "multilineText",
+          "label": "Message",
+          "required": true,
+          "validation": {
+            "maxLength": 2000
+          }
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "id": "preview",
+      "type": "preview",
+      "title": "Review answers"
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "id": "appointment",
+  "revision": 1,
+  "title": "Book an appointment",
+  "description": "Date, time, numeric input and a switch.",
+  "sections": [
+    {
+      "id": "visit",
+      "title": "Visit details",
+      "fields": [
+        {
+          "id": "service",
+          "type": "singleSelect",
+          "label": "Service",
+          "required": true,
+          "options": [
+            {
+              "value": "consultation",
+              "label": "Consultation"
+            },
+            {
+              "value": "followUp",
+              "label": "Follow-up"
+            }
+          ]
+        },
+        {
+          "id": "date",
+          "type": "date",
+          "label": "Preferred date",
+          "required": true
+        },
+        {
+          "id": "time",
+          "type": "time",
+          "label": "Preferred time",
+          "required": true
+        },
+        {
+          "id": "attendees",
+          "type": "number",
+          "label": "Number of attendees",
+          "required": false,
+          "defaultValue": 1,
+          "validation": {
+            "min": 1,
+            "max": 10,
+            "integerOnly": true
+          }
+        },
+        {
+          "id": "reminder",
+          "type": "toggle",
+          "label": "Send a reminder",
+          "required": false,
+          "defaultValue": true
+        }
+      ]
+    },
+    {
+      "id": "notes",
+      "title": "Additional details",
+      "fields": [
+        {
+          "id": "notes",
+          "type": "multilineText",
+          "label": "Notes",
+          "required": false,
+          "validation": {
+            "maxLength": 500
+          }
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "id": "preview",
+      "type": "preview",
+      "title": "Review answers"
+    }
+  ]
+}

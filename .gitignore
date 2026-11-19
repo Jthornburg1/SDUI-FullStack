@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+
+# Python caches and coverage
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Local Python environments and configuration
+.venv/
+venv/
+.env
+.env.local
