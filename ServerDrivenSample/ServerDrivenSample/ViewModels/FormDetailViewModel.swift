@@ -78,5 +78,17 @@ class FormDetailViewModel {
         
         fieldValues[formFieldId] = .toggle(state: enabled)
     }
+    
+    func readValue(_ formFieldId: String) -> Double? {
+        guard case .number(let value) = fieldValues[formFieldId] else { return nil }
+        
+        return value
+    }
+    
+    func setValue(_ formFieldId: String, _ value: Double) {
+        if readValue(formFieldId) == value { return }
+        
+        fieldValues[formFieldId] = .number(value: value)
+    }
 }
 
