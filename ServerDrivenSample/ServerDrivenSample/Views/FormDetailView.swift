@@ -30,7 +30,9 @@ struct FormDetailView: View {
                             FormFieldView(
                                 formField: field,
                                 readText: viewModel.readText(_:),
-                                writeText: viewModel.writeText(_:_:)
+                                writeText: viewModel.writeText(_:_:),
+                                readBool: viewModel.readBool(_:),
+                                setBool: viewModel.setBool(_:_:)
                             )
                         }
                     }

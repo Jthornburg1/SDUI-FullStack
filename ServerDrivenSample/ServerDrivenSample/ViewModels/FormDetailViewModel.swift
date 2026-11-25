@@ -66,5 +66,17 @@ class FormDetailViewModel {
         
         fieldValues[formFieldId] = .string(term: newText)
     }
+    
+    func readBool(_ formFieldId: String) -> Bool? {
+        guard case .toggle(let enabled) = fieldValues[formFieldId] else { return nil }
+        
+        return enabled
+    }
+    
+    func setBool(_ formFieldId: String, _ enabled: Bool) {
+        if readBool(formFieldId) == enabled { return }
+        
+        fieldValues[formFieldId] = .toggle(state: enabled)
+    }
 }
 
