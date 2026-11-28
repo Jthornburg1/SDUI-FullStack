@@ -6,6 +6,7 @@
 //
 
 import Observation
+import Foundation
 
 @Observable
 @MainActor
@@ -89,6 +90,65 @@ class FormDetailViewModel {
         if readValue(formFieldId) == value { return }
         
         fieldValues[formFieldId] = .number(value: value)
+    }
+    
+    func readOption(_ formFieldId: String) -> String? {
+        guard case .string(let choice) = fieldValues[formFieldId] else { return nil }
+        
+        return choice
+    }
+    
+    func setOption(_ formFieldId: String, _ option: String) {
+        if readOption(formFieldId) == option { return }
+        
+        fieldValues[formFieldId] = .string(term: option)
+    }
+    
+    func readDate(_ formFieldId: String) -> Date? {
+        
+        guard case .string(let dateString) = fieldValues[formFieldId] else { return nil }
+        let strategy = Date.ParseStrategy(
+            format: "\(day: .twoDigits)/\(month: .twoDigits)/\(year: .twoDigits)",
+            locale: Locale(identifier: "en_US_POSIX"), timeZone: .current
+        )
+        return try? Date(dateString, strategy: strategy)
+        
+    }
+    
+    func setDate(_ formFieldId: String, _ selectedDate: Date) {
+        if readDate(formFieldId) == selectedDate { return }
+        
+        let formattedDateString = selectedDate.formatted(
+            .dateTime
+                .day(.twoDigits)
+                .month(.twoDigits)
+                .year(.twoDigits)
+        )
+        
+        fieldValues[formFieldId] = .string(term: formattedDateString)
+    }
+    
+    func readTime(_ formFieldId: String) -> Date? {
+        guard case .string(let timeString) = fieldValues[formFieldId] else { return nil }
+        
+        let strategy = Date.ParseStrategy(
+            format: "\(hour: .twoDigits(clock: .twelveHour, hourCycle: .oneBased))/\(minute: .twoDigits)",
+            locale: Locale(identifier: "en_US_POSIX"), timeZone: .current
+        )
+        
+        return try? Date(timeString, strategy: strategy)
+    }
+    
+    func setTime(_ formFieldId: String, _ selectedTime: Date) {
+        if readTime(formFieldId) == selectedTime { return }
+        
+        let formattedTimeString = selectedTime.formatted(
+            .dateTime
+                .hour(.twoDigits(amPM: .omitted))
+                .minute(.twoDigits)
+        )
+        
+        fieldValues[formFieldId] = .string(term: formattedTimeString)
     }
 }
 
